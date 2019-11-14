@@ -170,6 +170,8 @@ void serialEvent() {
       Serial.println("vse");
     }
 
+    //KEK
+    
     //    else if (initial_word == "HTEST") {
     //      done_flag = false;
     //      for (int i = 0; i < 10; i++) {
