@@ -167,6 +167,7 @@ void serialEvent() {
         }
       }
       done_flag = true;
+      Serial.println("vse");
     }
 
     //    else if (initial_word == "HTEST") {
