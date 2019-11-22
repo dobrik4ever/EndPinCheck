@@ -143,24 +143,50 @@ void serialEvent() {
     // Утилиты
 
     else if (initial_word == "HTEST") {
+      boolean test_end = 1;
       done_flag = false;
       int times = getValue(input_data, ' ', 1).toInt();
-      
-      motorAutohome(m1, m1e);
+      //      Serial.println(times);
+      // times = 50;
       m1.setCurrentPosition(0);
-      m1.moveTo(100);
+
+      //=======
+
+      if (digitalRead(m1e) == 1) m1.moveTo(100);
+      while (m1.distanceToGo() != 0) m1.run();
+
+      int i = 0;
+      m1.setSpeed(-500);
+
+      while (true) {
+          if (digitalRead(m1e) == test_end) {
+//            Serial.println(m1.currentPosition());
+            break;
+          }
+          m1.runSpeed();
+        }
+      m1.setCurrentPosition(0);
+
+      //=======
+
+      m1.setCurrentPosition(0);
+      m1.moveTo(1000);
       while (m1.distanceToGo() != 0) m1.run();
       m1.setCurrentPosition(0);
 
-      
+
       for (int i = 0; i < times; i++) {
         m1.moveTo(0);
         while (m1.distanceToGo() != 0) m1.run();
-        
-        m1.setSpeed(-500);
+
+        m1.setSpeed(-200);
         while (true) {
-          if (digitalRead(m1e) == 1) {
-            Serial.println(m1.currentPosition());
+          if (digitalRead(m1e) == test_end) {
+            Serial.println(
+              "  "+
+              String(m1.currentPosition())+
+              "  "
+              );
             break;
           }
           m1.runSpeed();
@@ -171,7 +197,7 @@ void serialEvent() {
     }
 
     //KEK
-    
+
     //    else if (initial_word == "HTEST") {
     //      done_flag = false;
     //      for (int i = 0; i < 10; i++) {

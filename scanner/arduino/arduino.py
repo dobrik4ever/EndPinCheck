@@ -78,10 +78,9 @@ class Arduino(QtCore.QThread):
                 t = t.decode("utf-8")
                 self.serialInput = t[:-2]
 
-                if self.serialInput != last_input:
-                    self.new_message.emit(self.serialInput)
-                    last_input = self.serialInput
-                    self.puk.set()
+                self.new_message.emit(self.serialInput)
+                last_input = self.serialInput
+                self.puk.set()
 
                     
                     # print('received:[{}]'.format(self.serialInput))

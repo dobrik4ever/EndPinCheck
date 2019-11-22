@@ -110,6 +110,7 @@ class Scanner(QtCore.QObject):
         for i in self.m_borders:
             self.m_borders[i] = self.motors_settings.loc[i,'max distance']
         # self.camera = Camera()
+        
         self.arduino.new_message.connect(self.update_position)
 
     def select_objective(self, objective_name):
